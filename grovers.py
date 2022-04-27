@@ -8,7 +8,6 @@ from qiskit.providers.ibmq import least_busy
 
 from qiskit.tools.visualization import plot_histogram
 
-
 # Initializing circuit: define as 2 qubits
 q = QuantumRegister(2, "q")
 c = ClassicalRegister(2, "c")
@@ -34,10 +33,13 @@ qc.barrier(q)
 qc.measure(q[0], c[0])
 qc.measure(q[1], c[1])
 
+qc.draw()
+
 ## Step 4: Run on backend simulator and print results
-simulator = Aer.get_backend("qasm_simulator")
+simulator = Aer.get_backend("aer_simulator")
 result = execute(qc, backend=simulator, shots=2048).result()
 counts = result.get_counts()
+
 
 print("RESULT: ", counts, "\n")
 
